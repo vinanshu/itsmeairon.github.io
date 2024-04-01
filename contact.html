@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(latte.jpg);
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        header {
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-links li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .menu-links li a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        h1 {
+            font-size: 28px;
+            line-height: 1.5;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 span {
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-links li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .menu-links li a {
+                font-size: 16px;
+            }
+
+            #menu-btn {
+                display: block;
+            }
+        }
+
+        @media (min-width: 769px) {
+            #menu-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="navbar">
+                <div id="menu-btn">&#9776;</div>
+                <ul class="menu-links">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./product.html">Product</a></li>
+                    <li><a href="./aboutus.html">About us</a></li>
+                    <li><a href="./contact.html">Contact us</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <h1>OUR PHYSICAL STORE IS LOCATED AT <span>TAMBOBONG VILLANUEVA <br> MISAMIS ORIENTAL</span><br>
+        CONTACT <span>09516792029</span><br>
+        FOR MORE INFO <span>THANK YOU!</span>
+    </h1>
+</body>
+
+</html>

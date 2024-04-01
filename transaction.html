@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-image: url(latte.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 70px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c06b3e;
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Transaction Details</h2>
+        <div id="transactionDetails"></div>
+        <div id="orderList"></div>
+        <div id="fee" style="display: none;">
+            <label for="feeDisplay">Fee Charge:<span id="feeDisplay"></span></label>
+        </div> <br>
+        <div id="totalPrice"></div>
+        <form id="transactionForm" onsubmit="return submitForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <label for="number">Number:</label>
+            <input type="text" id="number" name="number" required placeholder="Enter your phone number">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required placeholder="Enter your location">
+
+            <label for="option">Option:</label>
+            <select id="option" name="option" required>
+                <option value="" disabled selected hidden>Choose an option</option>
+                <option value="cash">Cash on Delivery</option>
+                <option value="pickup">Pick Up</option>
+            </select>
+         
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            var name = document.getElementById('name').value;
+            var number = document.getElementById('number').value;
+            var location = document.getElementById('location').value;
+            var option = document.getElementById('option').value;
+
+            // Basic form validation
+            if (!name.trim() || !number.trim() || !location.trim() || !option.trim()) {
+                alert('Please fill in all fields');
+                return false;
+            }
+
+            // Assuming the form is valid, redirect to another page
+            window.location.href = "proceed.html";
+            return false; // Prevent default form submission
+        }
+
+        document.getElementById('option').addEventListener('change', function () {
+            var selectedOption = this.value;
+            var feeDisplay = document.getElementById('feeDisplay');
+
+            // Check if the selected option is "Cash on Delivery"
+            if (selectedOption === 'cash') {
+                // Display the fee charge
+                feeDisplay.textContent = '50 pesos';
+                document.getElementById('fee').style.display = 'block';
+            } else {
+                // Hide the fee charge if not cash on delivery
+                feeDisplay.textContent = ''; // Clear fee display
+                document.getElementById('fee').style.display = 'none';
+            }
+
+            // Recalculate total when the option is changed
+            calculateTotal();
+        });
+
+        function calculateTotal() {
+            var orders = JSON.parse(localStorage.getItem("orders")) || [];
+            var total = 0;
+
+            if (orders.length > 0) {
+                orders.forEach(function (order) {
+                    var itemPrice = parseFloat(order.price) * parseInt(order.quantity);
+                    total += itemPrice;
+                });
+
+                // Check if the selected option is "Cash on Delivery" and add fee
+                if (document.getElementById('option').value === 'cash') {
+                    total += 50; // Add fee of 50 pesos
+                }
+
+                // Display the total price
+                document.getElementById('totalPrice').textContent = 'Total Price: ₱' + total.toFixed(2);
+            } else {
+                document.getElementById('totalPrice').textContent = ''; // Clear total price if no orders
+            }
+        }
+
+        // Call the calculateTotal function when the page loads
+        calculateTotal();
+
+        function displayTransactionDetails() {
+            var orders = JSON.parse(localStorage.getItem("orders")) || [];
+            var transactionDetailsContainer = document.getElementById("transactionDetails");
+            var total = 0;
+
+            if (orders.length > 0) {
+                var transactionHTML = "<h2>Your Order:</h2>";
+                transactionHTML += "<ul>";
+
+                orders.forEach(function (order) {
+                    var itemName = order.coffeeName; // Corrected variable name
+                    var itemPrice = parseFloat(order.price) * parseInt(order.quantity);
+                    transactionHTML += "<li>" + order.quantity + " x " + itemName + " - " + '₱' + itemPrice.toFixed(2) + "</li>";
+                    total += itemPrice;
+                });
+
+                var selectedOption = document.getElementById('option').value;
+                if (selectedOption === 'cash') {
+                    // If cash delivery, add fee charge of 50 pesos to the total
+                    total += 50;
+                }
+
+                transactionHTML += "</ul>";
+
+                transactionDetailsContainer.innerHTML = transactionHTML;
+            } else {
+                transactionDetailsContainer.innerHTML = "<p>No orders added yet.</p>";
+            }
+        }
+
+        // Call the displayTransactionDetails function when the page loads
+        displayTransactionDetails();
+    </script>
+</body>
+
+</html>

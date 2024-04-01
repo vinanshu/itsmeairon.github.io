@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffeelicious</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">COFFEELICIOUS<span>.</span></a> 
+            <div id="menu-btn">&#9776;</div>
+            <ul class="menu-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./product.html">Product</a></li>
+                <li><a href="./aboutus.html">About us</a></li>
+                <li><a href="./contact.html">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="content">
+            <h1>Start Your Day With Delicious Coffee</h1>
+            <p>Coffee is the best thing in life because it brings people together.</p>
+            <button id="order-btn">Order Now</button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuBtn = document.getElementById("menu-btn");
+            const menuLinks = document.querySelectorAll(".menu-links a");
+        
+            menuBtn.addEventListener("click", function() {
+                document.body.classList.toggle("show-mobile-menu");
+            });
+        
+            menuLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const url = e.target.getAttribute("href");
+                    window.open(url, '_blank'); // Open link in a new tab
+                    document.body.classList.remove("show-mobile-menu"); // Close the menu after clicking a link
+                });
+            });
+        
+            // Close the menu when clicking outside of it
+            document.addEventListener("click", function(event) {
+                const isMenuOpen = document.body.classList.contains("show-mobile-menu");
+                if (isMenuOpen && !event.target.closest('.navbar')) {
+                    document.body.classList.remove("show-mobile-menu");
+                }
+            });
+    
+            // Redirect to product.html when "Order Now" button is clicked
+            const orderButton = document.getElementById("order-btn");
+            orderButton.addEventListener("click", function() {
+                window.location.href = "./product.html";
+            });
+        });
+    </script>
+    
+</body>
+</html>

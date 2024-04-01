@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Menu</title>
+    <style>
+        h1 button {
+            cursor: pointer;
+            background-color: white;
+            border: 0px;
+            color: black;
+            /* Changed color to black */
+            font-size: 50px;
+            width: 250px;
+            height: 50px;
+            border-radius: 10px;
+        }
+
+
+        h1 button:hover {
+            cursor: pointer;
+            background-color: white;
+            border: 0px;
+            color: #fff;
+            background-color: #c06b3e;
+            font-size: 50px;
+            width: 250px;
+            height: 50px;
+        }
+
+        header .navbar {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: space-between;
+            margin-left: 500px;
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+
+        .confirms {
+            background-color: #c06b3e;
+            color: white;
+            border: 0px;
+            height: 50px;
+            width: 150px;
+            border-radius: 10px;
+        }
+
+        body {
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<div>
+    <div>
+        <header>
+            <nav class="navbar">
+                <ul class="menu-links">
+                    <li><a href="./index.html" target="_blank">Home</a></li>
+                    <li><a href="./product.html" target="_blank">Product</a></li>
+                    <li><a href="./aboutus.html" target="_blank">About us</a></li>
+                    <li><a href="./contact.html" target="_blank">Contact us</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <div id="coffee" class="w3-container w3-black w3-padding-32">
+        <div id="confirm">
+            <button class="confirms" onclick="confirmOrder()">Confirm Orders</button>
+        </div>
+        <div id="ordersSummary" style="color: white;"></div>
+
+        <!-- Products -->
+        <div class="product">
+            <h1 style="background-image: url(coffee1.webp); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Cappuccino</b> <br>Freshly brewed espresso with steamed milk <br><button style="cursor:pointer;"
+                    onclick="order('Cappuccino', '65.00')"> 65.00₱</button>
+            </h1>
+        </div>
+        <hr>
+        <div class="product">
+            <h1 style="background-image: url(coffee2.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Frappepucino</b> <br>Espresso blended with ice and milk <br><button style="cursor:pointer;"
+                    onclick="order('Frappepucino', '70.00')"> 70.00₱</button>
+            </h1>
+        </div>
+        <hr>
+        <div class="product">
+            <h1 style="background-image: url(coffee3.webp); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Americano</b> <br>Espresso with hot water <br><button style="cursor:pointer;"
+                    onclick="order('Americano', '65.00')"> 65.00₱</button>
+            </h1>
+        </div>
+        <hr>
+        <div class="product">
+            <h1 style="background-image: url(coffee4.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Caffe Latte</b> <br>Espresso with steamed milk and a light layer of foam <br><button
+                    style="cursor:pointer;" onclick="order('Caffe Latte', '90.00')"> 90.00₱</button>
+            </h1>
+        </div>
+        <hr>
+        <div class="product">
+            <h1 style="background-image: url(coffee5.webp); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Macchiato</b> <br>Espresso with a dash of steamed milk <br><button style="cursor:pointer;"
+                    onclick="order('Macchiato', '80.00')"> 80.00₱</button>
+            </h1>
+        </div>
+        <hr>
+        <div class="product">
+            <h1 style="background-image: url(coffee6.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; padding: 150px;">
+                <b>Con Panna</b> <br>Espresso with whipped cream <br><button style="cursor:pointer;"
+                    onclick="order('Con Panna', '90.00')"> 90.00₱</button>
+            </h1>
+        </div>
+    </div>
+
+    <script>
+        var orders = []; // Array to hold orders
+
+        function order(coffeeName, price) {
+            var quantity = parseInt(prompt("Enter quantity for " + coffeeName, "1"));
+            if (!isNaN(quantity) && quantity > 0) {
+                // Add the new order to the array
+                orders.push({
+                    coffeeName: coffeeName,
+                    price: price,
+                    quantity: quantity
+                });
+                // Update orders summary display
+                updateOrdersSummary();
+            } else {
+                alert("Please enter a valid quantity.");
+            }
+        }
+
+        // Function to update the orders summary display
+        function updateOrdersSummary() {
+            var summaryContainer = document.getElementById('ordersSummary');
+            var summaryHTML = '<h3>Orders Summary:</h3>';
+            if (orders && orders.length > 0) {
+                summaryHTML += '<ul>';
+                orders.forEach(function (order) {
+                    summaryHTML += '<li>' + order.quantity + ' x ' + order.coffeeName + ' - ' + order.price + '₱ each</li>';
+                });
+                summaryHTML += '</ul>';
+            } else {
+                summaryHTML += '<p>No orders added yet.</p>';
+            }
+            // Update the HTML content of the summary container
+            summaryContainer.innerHTML = summaryHTML;
+        }
+
+        // Function to handle order confirmation and redirection
+        function confirmOrder() {
+            // Check if there are any orders
+            if (orders.length > 0) {
+                // Store orders in localStorage
+                localStorage.setItem("orders", JSON.stringify(orders));
+                // Open order.html in a new tab
+                window.open("transaction.html", "_blank");
+            } else {
+                alert("Please add some orders before confirming.");
+            }
+        }
+    </script>
+</body>
+
+</html>

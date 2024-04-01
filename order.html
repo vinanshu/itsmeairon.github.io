@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f4f4f4a6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(latte.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: #ffffff9a;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .total-price {
+            text-align: right;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        #proceed {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #c06b3e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #proceed:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Summary</h1>
+        <div id="orderList"></div>
+        <div id="totalPrice"></div>
+        <button id="proceed">Proceed</button>
+    </div>
+
+    <script>
+        // Retrieve orders from localStorage
+        var orders = JSON.parse(localStorage.getItem("orders"));
+
+        // Display orders summary
+        var orderList = document.getElementById("orderList");
+        var totalPrice = document.getElementById("totalPrice");
+        var totalPriceValue = 0;
+
+        if (orders && orders.length > 0) {
+            orders.forEach(function(order) {
+                var orderItem = document.createElement("div");
+                orderItem.classList.add("order-item");
+                orderItem.textContent = order.quantity + ' x ' + order.coffeeName + ' - ' + '₱'+ order.price ;
+                orderList.appendChild(orderItem);
+                
+                totalPriceValue += parseFloat(order.price) * order.quantity;
+            });
+            totalPrice.textContent = "Total Price: " + '₱'+ totalPriceValue.toFixed(2)  ;
+        } else {
+            orderList.textContent = "No orders placed yet.";
+        }
+
+        document.getElementById("proceed").addEventListener("click", function() {
+            window.location.href = "transaction.html";
+        });
+    </script>
+</body>
+</html>

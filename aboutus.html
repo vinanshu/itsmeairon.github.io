@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Details and Introduction</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif; /* Use a common font */
+            transition: all 0.3s ease; /* Smooth transitions */
+            background-color: black;
+        }
+
+        header .navbar {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: space-between;
+            margin-left: 500px;
+        }
+
+        .menu-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu-links a {
+            color: #ffffff;
+            text-decoration: dotted;
+            transition: 0.2s ease;
+            outline: none;
+        }
+        
+        .intro-section {
+            background-image: url('airon.jpg');
+            height: 150%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-position: center;
+            background-size: cover;
+            overflow-x: hidden;
+            padding: 50px; /* Add padding for better spacing */
+            box-sizing: border-box; /* Include padding in the element's total width */
+            text-align: center;
+        }
+        
+        .content {
+            color: #fff;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            font-size: 1.5em;
+            line-height: 1.6; /* Improved readability */
+            margin-bottom: 30px; /* Increase spacing between paragraphs */
+        }
+        
+        /* Animation */
+        .animate-text {
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth animation */
+        }
+        
+        /* Fade-in animation */
+        .animate-text.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+    </style>
+</head>
+
+<div>
+    <header>
+        <nav class="navbar">
+            <ul class="menu-links">
+                <li><a href="./index.html" target="_blank">Home</a></li>
+                <li><a href="./product.html" target="_blank">Product</a></li>
+                <li><a href="./aboutus.html" target="_blank">About us</a></li>
+                <li><a href="./contact.html" target="_blank">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+<body>
+    <section class="intro-section">
+        <div class="content">
+            <h1>Hello, Airon Dave Cabunoc</h1>
+            <p>COFFEELICIOUS is more than just a coffee shop; it's a destination where coffee enthusiasts come to savor the finest blends, indulge in delectable treats, and enjoy a cozy ambiance. Established with a passion for delivering exceptional coffee experiences, COFFEELICIOUS is committed to sourcing the highest quality beans from around the world and meticulously crafting each cup to perfection.</p>
+
+            <p>At COFFEELICIOUS, we believe that coffee is not just a beverage but a way of life. Our knowledgeable baristas are dedicated to providing personalized service, ensuring that every customer receives their perfect cup of coffee, whether it's a classic espresso, a creamy latte, or a specialty pour-over.</p>
+            
+            <p>In addition to our carefully curated coffee menu, COFFEELICIOUS offers a tempting selection of pastries, sandwiches, and snacks, all made with fresh, locally sourced ingredients. Whether you're grabbing a quick bite on the go or settling in for a leisurely afternoon, there's something to satisfy every craving at COFFEELICIOUS.</p>
+            
+            <p>But COFFEELICIOUS is more than just a place to enjoy great coffee and food. It's a community hub where friends gather, ideas flow, and connections are made. With comfortable seating, free Wi-Fi, and a welcoming atmosphere, COFFEELICIOUS invites guests to linger, relax, and engage in meaningful conversations.</p>
+            
+            <p>At COFFEELICIOUS, we're not just passionate about coffee; we're committed to creating memorable experiences that delight the senses and inspire the soul. Join us on a journey of flavor, discovery, and connection at COFFEELICIOUS – where every cup tells a story.</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            // Add animation class to elements when the DOM content is loaded
+            document.querySelector('.content').classList.add('animate-text', 'fade-in');
+        });
+    </script>
+</body>
+</html>

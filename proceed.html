@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to COFFEELICIOUS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        background-image: url(latte.jpg);
+        background-position: center;
+        background-size: cover;
+      }
+      
+      .container {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      #animation-container {
+        margin-top: 5px;
+        background-position: center;
+        background-size: cover;
+      }
+      
+      #animation-container img {
+        max-width: 100%;
+      }
+      
+      #welcome-text {
+        font-size: 24px;
+        color: #c06b3e;
+      }
+      
+</style>
+<body>
+  <div class="container">
+    <h1 id="welcome-text">Thank you for purchasing our COFFEELICIOUS</h1>
+    <div id="animation-container">
+      <img src="last.gif" alt="Coffee Animation">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    // Animation
+const animationContainer = document.getElementById("animation-container");
+const welcomeText = document.getElementById("welcome-text");
+
+// Initial animation state
+animationContainer.style.opacity = "0";
+welcomeText.style.opacity = "0";
+animationContainer.style.transform = "translateY(50px)";
+welcomeText.style.transform = "translateY(50px)";
+
+// Animation on load
+window.onload = function() {
+  setTimeout(function() {
+    animationContainer.style.transition = "opacity 1s, transform 1s";
+    welcomeText.style.transition = "opacity 1s, transform 1s";
+    animationContainer.style.opacity = "1";
+    welcomeText.style.opacity = "1";
+    animationContainer.style.transform = "translateY(0)";
+    welcomeText.style.transform = "translateY(0)";
+  }, 500); // Delay for 0.5 seconds before starting animation
+
+  // Redirect after 5 seconds
+  setTimeout(function() {
+    window.location.href = "index.html";
+  }, 5000); // Delay for 5 seconds before redirecting
+};
+  </script>
+</body>
+</html>
